@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AwesomeIdeas</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+
+<body class='drew-bg'>
+<div class="container">
+<div class="header">
+ 
+   
+
+
+
+ <% if flash[:notice] || flash[:error] %>
+      <h3><%= flash[:notice] || flash[:error] %></h3>
+    <% end %>`
+
+
+
+<div class="pull-right">
+
+
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+
+      <div class="navbar-header">
+        <nav class="nav-main">
+          <%= link_to "About Us", about_us_path, class: "navbar-brand", id: "about" %> 
+
+          <%= link_to ideas_path,class: "navbar-brand", id: "idea" do %> 
+          <i class="fa fa-home fa-fw"></i>
+          Home
+          <% end %>
+
+          <%=link_to new_idea_path,class: "navbar-brand" do %>
+          <i class="fa fa-refresh fa-spin"></i>
+          New Idea
+          <% end %>
+
+
+
+
+<div class="pull-right">
+  
+
+          <% if user_signed_in? %>
+
+
+          <%= link_to destroy_user_session_path,method: :delete ,class: "btn btn-default" do %> 
+          <i class="fa fa-user fa-fw"></i>
+          sign out
+          <% end %>
+
+          Hello
+            <%= link_to "#{current_user.full_name}", edit_user_registration_path %>
+            <% else %>
+
+            <%= link_to new_user_session_path , class: "btn btn-default" do %>
+            <i class="fa fa-user fa-fw"></i>
+            sign in
+            <% end %>
+            <% end %>
+
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+  
+<div class="well">
+<div class="container">
+
+
+
+<div class="container-fluid">
+  <% if flash[:notice] %>
+    <div class="alert alert-success" >
+      <%= flash[:notice] %>
+    </div>
+  <% elsif flash[:alert] %>
+    <div class="alert alert-danger" >
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+  <div class="content">
+<%= yield %>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</div>
+
+</body>
+</html>

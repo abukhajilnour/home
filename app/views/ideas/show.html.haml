@@ -1,0 +1,37 @@
+%h1= @idea.title
+%p
+  = @idea.description
+  %br/
+  = link_to "Edit", edit_idea_path(@idea), class: "btn btn-default"
+  = link_to @idea, method: :delete ,class: "btn btn-danger", data: { confirm: "Are you sure you want to delete this idea?" } do
+    %i.fa.fa-trash-o
+    Delete
+
+
+
+  %br/
+  %br/
+  = link_to "All Ideas",ideas_path
+%h2 Add more idea
+
+    
+= form_for @comment, url: idea_comments_path(@idea) do |f|
+  .form-field
+  = f.text_area :body
+  %br
+  = f.submit "add more idea",class: "btn btn-primary"
+  
+
+%hr
+  -@idea.comments.each do |comment|
+    .well
+      .row
+        .col-sm-8.col-md-8.col-xs-8
+          %p= comment.body
+          
+        .col-sm-8.col-md-8.col-xs-8
+          .pull-right
+            = button_to [@idea, comment], method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure you want to delete the idea?"} do
+              %i.fa.fa-trash-o
+              Delete
+

@@ -1,0 +1,29 @@
+%h1 listing all ideas
+%h1 Idea Factory
+.container-fluid
+  .row
+    .col-xs-6.col-md-4
+- @ideas.each do |idea|
+  .well
+    %h2= link_to idea.title,idea_path(idea)
+    %p= idea.description
+    - if idea.user
+      %h4= "Created By: #{idea.user.full_name}"
+    %hr/
+
+    %p 
+      Likes: #{idea.likes.count}
+      - if user_signed_in?
+        - if like = idea.like_for(current_user)
+          = link_to (fa_icon "thumbs-o-down"), idea_like_path(idea, like), method: :delete
+        - else
+          = link_to (fa_icon "thumbs-o-up"), idea_likes_path(idea), method: :post
+    
+    %p
+      Member: #{idea.joins.count}
+      - if user_signed_in?
+        - if join = idea.join_for(current_user)
+          = link_to (fa_icon "heart"),idea_join_path(idea, like), method: :delete
+        - else
+          = link_to (fa_icon "heart-o"), idea_joins_path(idea),method: :post
+          

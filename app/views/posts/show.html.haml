@@ -1,0 +1,12 @@
+%h1= @post.title
+%p= @post.description
+%hr
+%h2 remarks
+= form_for [@post, @remark] do |f|
+  = f.text_area :body
+  %br
+  = f.submit "remark"
+
+- @post.remarks.each do |remark|
+  %p= remark.body
+  %hr
